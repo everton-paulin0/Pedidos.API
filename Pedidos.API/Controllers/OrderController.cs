@@ -31,48 +31,16 @@ namespace Pedidos.API.Controllers
             _mediator = mediator;
         }
 
-        
-        /*
-        [HttpPost]
-        public async Task<IActionResult> PostAsync ([FromServices] AppDbContext context,[FromBody] CreateOrderInputModel order)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
-            var orders = new Order
-            {
-                Product = order.Product,
-                Quantity = order.Quantity,
-                ClientDoc = order.ClientDoc,
-                ClientName = order.ClientName,
-                Price = order.Price,
-                TotalCost = order.TotalCost
-            };
-
-
-            try
-            {
-                await context.Orders.AddAsync(orders);
-                await context.SaveChangesAsync();
-
-                return Ok();
-
-            }
-            catch (Exception)
-            {
-
-                return BadRequest();
-            }
-        }
-
-        */
-        
+               
         [HttpPost]
         public async Task<IActionResult> Post(InsertOrderCommand command)
         {
             var result = await _mediator.Send(command);
+
+            if (!result.IsSucess)
+            {
+                return BadRequest(result.Message);
+            }
 
             return CreatedAtAction(nameof(GetById), new { id = result.Data }, command);
         }
@@ -81,7 +49,6 @@ namespace Pedidos.API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get(string search = "")
         {
-            //var result = _service.GetAll();
             var query = new GetAllOrdersQuery();
 
             var result = await _mediator.Send(query);
