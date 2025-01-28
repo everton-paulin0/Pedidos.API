@@ -6,7 +6,7 @@ namespace Pedidos_Application.Model
 {
     public class OrderItemViemModel
     {
-        public OrderItemViemModel(int id, string product, int quantity, string clientDoc, string clientName, double price, double totalCost)
+        public OrderItemViemModel(int id, string product, int quantity, string clientDoc, string clientName, double price)
         {
             Id = id;
             Product = product;
@@ -14,7 +14,7 @@ namespace Pedidos_Application.Model
             ClientDoc = clientDoc;
             ClientName = clientName;
             Price = price;
-            TotalCost = totalCost;
+            TotalCost = (quantity*price);
         }
 
         public int Id { get; set; }
@@ -26,6 +26,6 @@ namespace Pedidos_Application.Model
         public double TotalCost { get; set; }
 
         public static OrderItemViemModel FromEntityOrder(Order order)
-            => new (order.Id, order.Product, order.Quantity, order.ClientDoc, order.ClientName, order.Price, order.TotalCost);
+            => new (order.Id, order.Product, order.Quantity, order.ClientDoc, order.ClientName, order.Price);
     }
 }

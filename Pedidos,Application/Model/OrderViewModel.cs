@@ -5,7 +5,7 @@ namespace Pedidos_Application.Model
 {
     public class OrderViewModel
     {
-        public OrderViewModel(int id, string product, int quantity, string clientName, string clientDoc, double price, double totalCost)
+        public OrderViewModel(int id, string product, int quantity, string clientName, string clientDoc, double price)
         {
             Id = id;
             Product = product;
@@ -13,7 +13,7 @@ namespace Pedidos_Application.Model
             ClientName = clientName;
             ClientDoc = clientDoc;
             Price = price;
-            TotalCost = totalCost;
+            TotalCost = (quantity*price);
         }
         
         public int Id { get; set; }
@@ -25,6 +25,6 @@ namespace Pedidos_Application.Model
         public double TotalCost { get; set; }
 
         public static OrderViewModel FromEntityOrder(Order entity)
-            => new OrderViewModel (entity.Id, entity.Product, entity.Quantity, entity.ClientName, entity.ClientDoc, entity.Price, entity.TotalCost);
+            => new OrderViewModel (entity.Id, entity.Product, entity.Quantity, entity.ClientName, entity.ClientDoc, entity.Price);
     }
 }

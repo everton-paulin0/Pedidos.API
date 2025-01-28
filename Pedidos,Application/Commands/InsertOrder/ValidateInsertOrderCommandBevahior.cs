@@ -18,7 +18,7 @@ namespace Pedidos_Application.Commands.InsertOrder
         }
         public async Task<ResultViewModel<int>> Handle(InsertOrderCommand request, RequestHandlerDelegate<ResultViewModel<int>> next, CancellationToken cancellationToken)
         {
-            var quantities = _context.Orders.Any(o => o.Quantity <= 0);
+            var quantities = _context.Orders.Any(o => o.Quantity > 0);
 
             if (!quantities)
             {

@@ -16,7 +16,7 @@ namespace Pedidos.Core.Entities
             ClientDoc = clientDoc;
             ClientName = clientName;
             Price = price;
-            TotalCost = totalCost;
+            TotalCost = (quantity*price);
             Status = OrderStatus.Started;
         }
 

@@ -32,10 +32,13 @@ namespace Pedidos_Application.Validator
                 .MaximumLength(20).          
                 WithMessage("No Máximo Caracteres");
 
+            /*
+
             RuleFor(o => o.TotalCost)
                 .NotEmpty()
                 .WithMessage("Por Favor Preencher o Valor Total")
                 .GreaterThanOrEqualTo(10);
+            */
         }
     }
 }
